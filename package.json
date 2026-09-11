@@ -31,7 +31,7 @@
     "node": ">=22"
   },
   "scripts": {
-    "build": "tsup src/cli.ts --format esm --clean --banner.js \"#!/usr/bin/env node\"",
+    "build": "tsup",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build"
