@@ -1,0 +1,98 @@
+{
+  "product": "ergolab",
+  "version": "0.1.0",
+  "about": "A usability lab for tools built for coding agents",
+  "recorded_at": "2026-09-11T05:07:19Z",
+  "environment": {
+    "node": "v22.23.1",
+    "platform": "darwin arm64 (macOS)",
+    "built_with": "npm run build (tsup, ESM, node22 target)",
+    "tests": "109 passing (vitest): schema, suite loading, runner lifecycle, drivers (spawn-mocked), binary discovery, demo MCP server (spawned, protocol-level), CLI wiring",
+    "drivers_run_for_this_record": ["mock"],
+    "binary_discovery_on_recording_machine": {
+      "claude-code": { "status": "runnable", "path": "~/.local/bin/claude" },
+      "codex": {
+        "status": "runnable",
+        "path": "/Applications/ChatGPT.app/Contents/Resources/codex",
+        "note": "found at the macOS ChatGPT.app fallback, never on PATH"
+      },
+      "gemini-cli": { "status": "skipped", "reason": "not-found" }
+    }
+  },
+  "runs": [
+    {
+      "command": "node dist/cli.js run suites/showcase-grep-vs-tool --agents mock,gemini-cli --out <tmp>/showcase",
+      "purpose": "the grep arm of the bundled A/B pair, plus the skip contract: gemini-cli is not installed on this machine and keeps its row as skipped",
+      "suite": "showcase-grep-vs-tool",
+      "exit_code": 0,
+      "panel": [
+        {
+          "driver": "mock",
+          "results": [
+            { "task": "find-latest-version", "status": "pass", "stage": "verify", "wall_ms": 16, "tokens": 25 },
+            { "task": "find-license", "status": "pass", "stage": "verify", "wall_ms": 14, "tokens": 29 },
+            { "task": "list-dependencies", "status": "fail", "stage": "verify", "wall_ms": 13 },
+            { "task": "count-by-keyword", "status": "fail", "stage": "verify", "wall_ms": 13 },
+            { "task": "find-deprecated", "status": "fail", "stage": "verify", "wall_ms": 15 },
+            { "task": "find-publisher", "status": "fail", "stage": "verify", "wall_ms": 14 }
+          ]
+        },
+        { "driver": "gemini-cli", "skipped": "not-found", "results": [] }
+      ],
+      "scorecard": "Scorecard: mock 2/6 · gemini-cli skipped — panel 2/6 (33%)",
+      "badge": { "schemaVersion": 1, "label": "agent-usability", "message": "33/100", "color": "orange" },
+      "artifacts": ["ergolab-report.json", "report/report.md", "badge.json"]
+    },
+    {
+      "command": "node dist/cli.js run demo-mcp --agents mock --out <tmp>/demomcp",
+      "purpose": "the tool arm of the bundled A/B pair: every answer lives only behind the bundled stdio MCP registry server, which a grep-only agent cannot use",
+      "suite": "demo-mcp",
+      "exit_code": 0,
+      "panel": [
+        {
+          "driver": "mock",
+          "results": [
+            { "task": "find-latest-version", "status": "fail", "stage": "verify", "wall_ms": 8 },
+            { "task": "find-license", "status": "fail", "stage": "verify", "wall_ms": 6 },
+            { "task": "list-dependencies", "status": "fail", "stage": "verify", "wall_ms": 7 },
+            { "task": "count-by-keyword", "status": "fail", "stage": "verify", "wall_ms": 6 },
+            { "task": "find-deprecated", "status": "fail", "stage": "verify", "wall_ms": 7 },
+            { "task": "find-publisher", "status": "fail", "stage": "verify", "wall_ms": 5 }
+          ]
+        }
+      ],
+      "scorecard": "Scorecard: mock 0/6 — panel 0/6 (0%)",
+      "badge": { "schemaVersion": 1, "label": "agent-usability", "message": "0/100", "color": "red" },
+      "note": "the recorded numbers are the A/B baseline: the same six tasks pass 2/6 when the dataset is a greppable plain file (the showcase run above) and 0/6 when it sits behind the MCP tool surface the mock agent cannot use"
+    }
+  ],
+  "verified_paths": [
+    {
+      "what": "npm-pack quickstart on a clean directory",
+      "steps": "npm pack -> npm install <tarball> in an empty directory -> npx ergolab --version -> npx ergolab run demo-mcp --agents mock --out ./out",
+      "result": "exit 0; version 0.1.0; panel 0/6 (mock) with ergolab-report.json, report/report.md, badge.json, and sandbox/ written; both bundled suites ship inside the package"
+    },
+    {
+      "what": "ergolab init scaffold",
+      "steps": "ergolab init in an empty directory -> edit nothing -> ergolab run . --agents mock",
+      "result": "exit 0; three starter tasks run keyless: lookup-answer pass, use-the-tool fail, follow-the-docs fail (the affordance gap, in miniature)"
+    },
+    {
+      "what": "ergolab report re-render",
+      "steps": "ergolab report <saved ergolab-report.json> --out <fresh dir>",
+      "result": "exit 0; terminal table + scorecard re-printed; ergolab-report.json, report/report.md, badge.json re-written"
+    },
+    {
+      "what": "bundled demo MCP server",
+      "steps": "spawned by the protocol-level test suite as `node --experimental-strip-types suites/demo-mcp/server/index.ts`",
+      "result": "initialize handshake, tools/list (three tools), and tools/call answers verified line-level; zero dependencies"
+    }
+  ],
+  "limitations": [
+    "The recorded panel is the deterministic mock driver (a grep-only stand-in with no tool access and no API key). claude-code and codex binaries were discovered runnable on the recording machine but not invoked for this record; their headless invocations are exercised by the spawn-mocked driver tests, and any real run is one command away (ergolab run demo-mcp with no --agents).",
+    "The gemini-cli headless invocation is unverified end to end: no gemini binary exists on the recording machine, so its driver resolves as skipped (not-found) and its flags are coded from the CLI's documented non-interactive mode only.",
+    "One sequential sample per agent-task pair — no repeats, no confidence intervals. The report surfaces cliffs (0 of 6), not fine differences.",
+    "Wall times are machine-specific (this record: darwin arm64); treat them as orders of magnitude, not benchmarks.",
+    "The demo gif (assets/ergolab-demo.gif) records the showcase run exactly as listed above; its pacing is condensed for reading, the output is real."
+  ]
+}

@@ -1,0 +1,19 @@
+# The smallest useful ErgoLab suite: one greppable baseline task, one
+# affordance task, no MCP server. Run it keyless from the repo root:
+#
+#   node dist/cli.js run examples/minimal --agents mock
+#
+# Then replace the prompts with your own tool's operations — this file is
+# the three-line version of what `ergolab init` scaffolds.
+
+tool: example
+
+tasks:
+  - name: greppable-baseline
+    setup: "echo 'the-answer: 42' > facts.txt"
+    prompt: "Find the value of `the-answer` in facts.txt and write it to answer.txt."
+    verify: "grep -q 42 answer.txt"
+
+  - name: affordance
+    prompt: "Use the tool to produce its main result and write it to answer.txt."
+    verify: "test -s answer.txt"

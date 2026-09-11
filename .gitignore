@@ -13,6 +13,11 @@ dist/
 # sandbox scratch (runner workdirs)
 sandbox/
 
+# report artifacts from local runs (ergolab run defaults --out to the cwd)
+ergolab-report.json
+report/
+badge.json
+
 # local assistant config
 .claude/
 CLAUDE.md
