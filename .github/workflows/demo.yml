@@ -1,0 +1,41 @@
+# Manual refresh of the committed demo gif. assets/ergolab-demo.gif is the
+# source of truth (rendered at build time from a real run); this workflow
+# only re-renders it on demand, so a flaky render can never block a release.
+# vhs + ttyd + ffmpeg are installed from apt deterministically — the
+# charmbracelet/vhs-action self-install of ffmpeg is broken on current
+# GitHub runners.
+
+name: demo
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  vhs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Install vhs + ttyd + ffmpeg (apt)
+        run: |
+          sudo mkdir -p /etc/apt/keyrings
+          curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg
+          echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list >/dev/null
+          sudo apt-get update && sudo apt-get install -y vhs ttyd ffmpeg
+      - run: vhs docs/demo.tape
+      - name: Commit the rendered gif if it changed
+        run: |
+          git config user.name  "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git add assets/ergolab-demo.gif
+          git diff --cached --quiet && { echo "no change"; exit 0; }
+          git commit -m "chore: render demo gif"
+          git push origin HEAD:${{ github.ref_name }}

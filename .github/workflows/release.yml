@@ -1,0 +1,57 @@
+# Release artifacts: build, test, and package the npm tarball on a version
+# tag. The tarball plus its checksums are staged in dist/ and uploaded as
+# workflow artifacts; attaching them to the GitHub Release is done by the
+# publish step outside this workflow. The optional npm publish job is opt-in
+# (set the repo variable NPM_PUBLISH=true and the NPM_TOKEN secret) so a
+# fresh repo's first release stays green.
+
+name: release
+
+on:
+  push:
+    tags: ["v*.*.*"]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+      - run: npm test
+      - name: Package the npm tarball into dist/
+        run: |
+          mkdir -p release
+          npm pack --pack-destination release
+          rm -rf dist
+          mv release dist
+      - name: Write checksums
+        run: cd dist && shasum -a 256 * > checksums.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-artifacts
+          path: dist/
+
+  publish:
+    needs: build
+    if: vars.NPM_PUBLISH == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          registry-url: https://registry.npmjs.org
+      - run: npm ci
+      - run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
