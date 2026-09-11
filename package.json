@@ -28,7 +28,7 @@
     "suites"
   ],
   "engines": {
-    "node": ">=22"
+    "node": ">=22.6.0"
   },
   "scripts": {
     "build": "tsup",

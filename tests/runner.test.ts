@@ -229,3 +229,69 @@ ${LOOKUP_TASKS}
     expect(() => PanelReportSchema.parse(report)).not.toThrow();
   });
 });
+
+describe("runSuite panel members that cannot run", () => {
+  it("keeps a skipped agent's row in the report, with its reason and no results", async () => {
+    const suite = await suiteFromYaml(`tool: test-tool\n${LOOKUP_TASKS}`);
+    const panel = [mockDriver, { name: "gemini-cli", skipped: "not-found" }];
+
+    const report = await runSuite({ suite, drivers: panel, sandboxRoot: await scratchDir() });
+
+    expect(report.agents).toHaveLength(2);
+    expect(report.agents[1]).toEqual({ driver: "gemini-cli", skipped: "not-found", results: [] });
+    // The skipped agent ran nothing; the driver that could run did.
+    expect(report.agents[0]?.results).toHaveLength(1);
+  });
+
+  it("reports a valid report with only skipped agents", async () => {
+    const suite = await suiteFromYaml(`tool: test-tool\n${LOOKUP_TASKS}`);
+
+    const report = await runSuite({
+      suite,
+      drivers: [{ name: "claude-code", skipped: "off-path-at /opt/claude" }],
+      sandboxRoot: await scratchDir(),
+    });
+
+    expect(() => PanelReportSchema.parse(report)).not.toThrow();
+    expect(report.agents[0]?.skipped).toBe("off-path-at /opt/claude");
+  });
+});
+
+describe("runSuite progress callback", () => {
+  it("reports each finished result in run order", async () => {
+    const suite = await suiteFromYaml(`
+tool: test-tool
+${LOOKUP_TASKS}
+  - name: other
+    prompt: "do the other thing"
+    verify: "true"
+`);
+    const events: Array<{ agent: string; task: string }> = [];
+
+    await runSuite({
+      suite,
+      drivers: [mockDriver],
+      sandboxRoot: await scratchDir(),
+      onTaskResult: (agent, result) => events.push({ agent, task: result.task }),
+    });
+
+    expect(events).toEqual([
+      { agent: "mock", task: "lookup" },
+      { agent: "mock", task: "other" },
+    ]);
+  });
+
+  it("is not called for a skipped agent", async () => {
+    const suite = await suiteFromYaml(`tool: test-tool\n${LOOKUP_TASKS}`);
+    const events: string[] = [];
+
+    await runSuite({
+      suite,
+      drivers: [{ name: "codex", skipped: "not-found" }, mockDriver],
+      sandboxRoot: await scratchDir(),
+      onTaskResult: (agent) => events.push(agent),
+    });
+
+    expect(events).toEqual(["mock"]);
+  });
+});

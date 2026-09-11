@@ -40,7 +40,8 @@ function isFailure(result: TaskResult): boolean {
   return result.status !== "pass";
 }
 
-function colorFor(status: TaskResult["status"]): (text: string) => string {
+/** Status color, shared by the renderers and the CLI's progress lines. */
+export function colorFor(status: TaskResult["status"]): (text: string) => string {
   switch (status) {
     case "pass":
       return pc.green;
@@ -53,7 +54,8 @@ function colorFor(status: TaskResult["status"]): (text: string) => string {
   }
 }
 
-function formatWall(wallMs: number): string {
+/** Wall-time format, shared by the renderers and the CLI's progress lines. */
+export function formatWall(wallMs: number): string {
   return wallMs < 1000 ? `${wallMs}ms` : `${(wallMs / 1000).toFixed(1)}s`;
 }
 
