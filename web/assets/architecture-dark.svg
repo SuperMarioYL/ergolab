@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="440" viewBox="0 0 1000 440" data-palette="e656c0-e76a83-eeacf6-6bc3d1c46b53" role="img" aria-labelledby="el-ar-d-title el-ar-d-desc"><title id="el-ar-d-title">ErgoLab architecture</title><desc id="el-ar-d-desc">One binary, no services: the suite file through SuiteLoader and Runner to four drivers and the Reporter artifacts.</desc>
+<defs>
+<linearGradient id="el-ar-d-brand" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e656c0"/><stop offset="0.55" stop-color="#e76a83"/><stop offset="1" stop-color="#eeacf6"/></linearGradient>
+<radialGradient id="el-ar-d-halo" cx="0.62" cy="0.36" r="0.85"><stop stop-color="#e656c0" stop-opacity="0.2"/><stop offset="1" stop-color="#0a0710" stop-opacity="0"/></radialGradient>
+<marker id="el-ar-d-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="m1 1 7 4-7 4" fill="none" stroke="#e656c0" stroke-width="1.5"/></marker>
+</defs>
+<style>text{font-family:Arial,'Helvetica Neue','Noto Sans',sans-serif}.el-ar-d-mono{font-family:Menlo,Consolas,'Liberation Mono',monospace}.el-ar-d-flow{animation:el-ar-d-fdash 5.5s linear infinite}@keyframes el-ar-d-fdash{to{stroke-dashoffset:-180}}.el-ar-d-pulse{animation:el-ar-d-fpulse 4.2s ease-in-out infinite}@keyframes el-ar-d-fpulse{0%,100%{opacity:.45}50%{opacity:1}}@media (prefers-reduced-motion: reduce){*{animation:none !important;transform:none !important}}</style>
+<rect width="1000" height="440" rx="14" fill="#0a0710"/>
+<rect width="1000" height="440" rx="14" fill="url(#el-ar-d-halo)"/>
+<pattern id="el-ar-d-grid" width="44" height="44" patternUnits="userSpaceOnUse"><path d="M44 0H0V44" fill="none" stroke="#3a1837" stroke-opacity="0.32" stroke-width="0.6"/></pattern><rect width="1000" height="440" rx="14" fill="url(#el-ar-d-grid)"/>
+
+<text x="36" y="42" fill="#b29cbd" font-size="12" font-weight="600" letter-spacing="2">ONE BINARY, NO SERVICES</text>
+<text x="36" y="72" fill="#fceefd" font-size="19" font-weight="700">Suite to report, one process</text>
+<rect x="36" y="96" width="150" height="100" rx="10" fill="#140d1a" stroke="#e656c0" stroke-width="1.6"/>
+<text x="52" y="124" fill="#e656c0" font-size="13.5" font-weight="700" class="el-ar-d-mono">ergolab.yaml</text>
+<text x="52" y="144" fill="#b29cbd" font-size="11" font-weight="600" class="el-ar-d-mono">tool</text>
+<text x="52" y="160" fill="#b29cbd" font-size="11" font-weight="600" class="el-ar-d-mono">mcp_servers</text>
+<text x="52" y="176" fill="#b29cbd" font-size="11" font-weight="600" class="el-ar-d-mono">tasks[]</text>
+<rect x="216" y="96" width="150" height="100" rx="10" fill="#13101d" stroke="#3a1837" stroke-width="1"/>
+<text x="232" y="124" fill="#fceefd" font-size="14.5" font-weight="700">SuiteLoader</text>
+<text x="232" y="144" fill="#b29cbd" font-size="11" font-weight="600" class="el-ar-d-mono">yaml + zod</text>
+<text x="232" y="160" fill="#b29cbd" font-size="11" font-weight="600" class="el-ar-d-mono">suite schema</text>
+<rect x="396" y="96" width="180" height="100" rx="10" fill="#13101d" stroke="#3a1837" stroke-width="1"/>
+<text x="412" y="124" fill="#fceefd" font-size="14.5" font-weight="700">Runner</text>
+<text x="412" y="144" fill="#b29cbd" font-size="10.5" font-weight="600" class="el-ar-d-mono">sandbox/&lt;agent&gt;/&lt;task&gt;/</text>
+<text x="412" y="160" fill="#b29cbd" font-size="11" font-weight="600" class="el-ar-d-mono">fresh temp dir each</text>
+<rect x="766" y="96" width="198" height="100" rx="10" fill="#13101d" stroke="#e656c0" stroke-width="1.6"/>
+<text x="782" y="118" fill="#e656c0" font-size="14.5" font-weight="700">Reporter</text>
+<text x="782" y="138" fill="#b29cbd" font-size="10.5" font-weight="600" class="el-ar-d-mono">terminal table</text>
+<text x="782" y="154" fill="#b29cbd" font-size="10.5" font-weight="600" class="el-ar-d-mono">report/report.md</text>
+<text x="782" y="170" fill="#b29cbd" font-size="10.5" font-weight="600" class="el-ar-d-mono">ergolab-report.json</text>
+<text x="782" y="186" fill="#b29cbd" font-size="10.5" font-weight="600" class="el-ar-d-mono">badge.json</text>
+<path d="M190 146 H212" fill="none" stroke="#e656c0" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="4 6" marker-end="url(#el-ar-d-arrow)" class="el-ar-d-flow"/>
+<path d="M370 146 H392" fill="none" stroke="#e656c0" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="4 6" marker-end="url(#el-ar-d-arrow)" class="el-ar-d-flow"/>
+<path d="M580 146 H762" fill="none" stroke="#e656c0" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="4 6" marker-end="url(#el-ar-d-arrow)" class="el-ar-d-flow"/>
+<path d="M486 200 V276" fill="none" stroke="#e656c0" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="4 6" marker-end="url(#el-ar-d-arrow)" class="el-ar-d-flow"/>
+<text x="500" y="244" fill="#b29cbd" font-size="10.5" font-weight="600" class="el-ar-d-mono">child processes</text>
+<rect x="36" y="280" width="180" height="78" rx="10" fill="#13101d" stroke="#3a1837" stroke-width="1"/><text x="52" y="306" fill="#fceefd" font-size="13" font-weight="700" class="-mono">claude-code</text><text x="52" y="326" fill="#b29cbd" font-size="10" font-weight="600" class="el-ar-d-mono">claude -p</text><text x="52" y="342" fill="#b29cbd" font-size="10" font-weight="600" class="el-ar-d-mono">--output-format json</text>
+<rect x="236" y="280" width="180" height="78" rx="10" fill="#13101d" stroke="#3a1837" stroke-width="1"/><text x="252" y="306" fill="#fceefd" font-size="13" font-weight="700" class="-mono">codex</text><text x="252" y="326" fill="#b29cbd" font-size="10" font-weight="600" class="el-ar-d-mono">codex exec --json</text><text x="252" y="342" fill="#b29cbd" font-size="10" font-weight="600" class="el-ar-d-mono">workspace-write</text>
+<rect x="436" y="280" width="180" height="78" rx="10" fill="#13101d" stroke="#3a1837" stroke-width="1"/><text x="452" y="306" fill="#fceefd" font-size="13" font-weight="700" class="-mono">gemini-cli</text><text x="452" y="326" fill="#b29cbd" font-size="10" font-weight="600" class="el-ar-d-mono">gemini -y</text><text x="452" y="342" fill="#b29cbd" font-size="10" font-weight="600" class="el-ar-d-mono">--output-format json</text>
+<rect x="636" y="280" width="180" height="78" rx="10" fill="#13101d" stroke="#3a1837" stroke-width="1"/><text x="652" y="306" fill="#fceefd" font-size="13" font-weight="700" class="-mono">mock</text><text x="652" y="326" fill="#b29cbd" font-size="10" font-weight="600" class="el-ar-d-mono">no model · no key</text><text x="652" y="342" fill="#b29cbd" font-size="10" font-weight="600" class="el-ar-d-mono">grep-only baseline</text>
+<circle cx="126" cy="290" r="3.4" fill="#e656c0" class="el-ar-d-pulse"/>
+<circle cx="326" cy="290" r="3.4" fill="#e656c0" class="el-ar-d-pulse"/>
+<circle cx="526" cy="290" r="3.4" fill="#e656c0" class="el-ar-d-pulse"/>
+<circle cx="726" cy="290" r="3.4" fill="#e656c0" class="el-ar-d-pulse"/>
+<path d="M816 319 H866 V202" fill="none" stroke="#e656c0" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="4 6" marker-end="url(#el-ar-d-arrow)" class="el-ar-d-flow"/>
+<line x1="36" y1="386" x2="964" y2="386" stroke="#3a1837"/>
+<text x="36" y="412" fill="#b29cbd" font-size="11.5" font-weight="600" class="el-ar-d-mono">driver interface: detect() · buildInvocation(task, sandbox) · parseUsage(rawOutput) — the only extension point</text>
+</svg>

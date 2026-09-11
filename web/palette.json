@@ -1,0 +1,38 @@
+{
+  "mode": "auto",
+  "id": "e656c0-e76a83-eeacf6-6bc3d1c46b53",
+  "identity": "https://github.com/supermarioyl/ergolab",
+  "primary": "#e656c0",
+  "secondary": "#e76a83",
+  "highlight": "#eeacf6",
+  "dark": {
+    "bg": "#0a0710",
+    "panel": "#13101d",
+    "code": "#140d1a",
+    "ink": "#fceefd",
+    "muted": "#b29cbd",
+    "line": "#3a1837",
+    "primary": "#e656c0",
+    "secondary": "#e76a83",
+    "highlight": "#eeacf6",
+    "accent": "#e656c0",
+    "buttonStart": "#bf48a0",
+    "buttonEnd": "#bb566a",
+    "buttonText": "#ffffff"
+  },
+  "light": {
+    "bg": "#fef9fd",
+    "panel": "#fef7fc",
+    "code": "#fdf3fb",
+    "ink": "#27162a",
+    "muted": "#725e80",
+    "line": "#f7cbec",
+    "primary": "#b74499",
+    "secondary": "#b25265",
+    "highlight": "#8a648f",
+    "accent": "#b74499",
+    "buttonStart": "#bf48a0",
+    "buttonEnd": "#bb566a",
+    "buttonText": "#ffffff"
+  }
+}

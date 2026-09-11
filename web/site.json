@@ -1,0 +1,335 @@
+{
+  "schema": 3,
+  "name": "ErgoLab",
+  "github": "https://github.com/SuperMarioYL/ergolab",
+  "palette": "auto",
+  "lang": {
+    "primary": "en",
+    "toggle": true
+  },
+  "meta": {
+    "visual_profile": "neon-particle",
+    "demo_source": "https://github.com/SuperMarioYL/ergolab/blob/main/docs/demo-results.json",
+    "content_version": "v0.1.0",
+    "implementation_version": "0.1.0"
+  },
+  "hero": {
+    "eyebrow": {
+      "en": "Open source · MIT · exit-code verify · no LLM judge",
+      "zh": "开源 · MIT · 退出码验证 · 不用 LLM 裁判"
+    },
+    "headline": {
+      "en": "Can a coding agent\nuse your tool?",
+      "zh": "编码智能体\n用得了你的工具吗？"
+    },
+    "sub": {
+      "en": "ErgoLab is a usability lab for tools built for coding agents: point a panel — Claude Code, Codex, Gemini CLI, plus a keyless mock baseline — at your library, CLI, or MCP server, and measure where agents fail, how long they take, and what they cost. Exit-code verification, no LLM judge.",
+      "zh": "ErgoLab 是一个为编码智能体打造的工具可用性实验室：把 Claude Code、Codex、Gemini CLI 与免密钥 mock 基线组成的面板指向你的库、CLI 或 MCP 服务器，测量智能体在哪里失败、耗时多久、成本多少。退出码验证，不用 LLM 裁判。"
+    },
+    "href": "#quickstart",
+    "command": "npx ergolab run demo-mcp",
+    "cta": {
+      "en": "Get started",
+      "zh": "开始使用"
+    },
+    "ctaGithub": {
+      "en": "View on GitHub",
+      "zh": "在 GitHub 查看"
+    }
+  },
+  "scene": {
+    "kind": "neon-graph",
+    "fallback": "/assets/scene-dark.svg",
+    "fallbackLight": "/assets/scene-light.svg",
+    "caption": {
+      "en": "One suite of tasks, a panel of agents, a cell-by-cell report",
+      "zh": "一套任务，一支智能体面板，一份逐格报告"
+    }
+  },
+  "advantages": [
+    {
+      "title": {
+        "en": "Exit-code verify, no LLM judge",
+        "zh": "退出码验证，不用 LLM 裁判"
+      },
+      "body": {
+        "en": "Verification is a shell script whose exit code decides pass or fail — deterministic, free, and identical across runs. No LLM judge, no fuzzy matching, no oracle drift; the suite itself is a file (ergolab.yaml) you commit and diff, and every run gets fresh sandboxes.",
+        "zh": "验证就是一段 shell 脚本，退出码决定通过与否 —— 确定性、零成本、每次运行完全一致。没有 LLM 裁判、没有模糊匹配、没有裁判漂移；套件本身就是一个可提交、可 diff 的文件（ergolab.yaml），且每次运行都是全新沙箱。"
+      }
+    },
+    {
+      "title": {
+        "en": "A panel of agents, with a keyless baseline",
+        "zh": "一支智能体面板，自带免密钥基线"
+      },
+      "body": {
+        "en": "The same tasks run against every agent CLI installed on your machine — Claude Code, Codex, Gemini CLI — sequentially, one sample per pair, alongside a deterministic mock agent that needs no model, key, or network. The mock models the grep-first agent: it is the baseline every real agent is read against.",
+        "zh": "同一组任务依次跑过你机器上已安装的每个智能体 CLI —— Claude Code、Codex、Gemini CLI —— 每对组合一个样本，外加一个无需模型、密钥、网络的确定性 mock 智能体。mock 刻画的是「grep 优先」的智能体：它是读每个真实智能体时对照的基线。"
+      }
+    },
+    {
+      "title": {
+        "en": "Skipped, never dropped",
+        "zh": "跳过，但绝不消失"
+      },
+      "body": {
+        "en": "An agent whose binary cannot run keeps its row with the reason — skipped (reason: not-found), never silently dropped — so panel coverage stays visible. Discovery probes PATH first, then known install locations; on the recording machine it found claude at ~/.local/bin/claude and codex inside ChatGPT.app, an install that never touches PATH.",
+        "zh": "二进制无法运行的智能体会带着原因保留自己的行 —— skipped (reason: not-found)，绝不会被悄悄丢掉 —— 面板覆盖度始终可见。探测先查 PATH，再查已知安装位置；在录制机器上，它分别在 ~/.local/bin/claude 找到了 claude，在 ChatGPT.app 内部找到了 codex（一个从未进过 PATH 的安装）。"
+      }
+    },
+    {
+      "title": {
+        "en": "Reports and a badge that stay in your repo",
+        "zh": "报告与徽章，都留在你的仓库里"
+      },
+      "body": {
+        "en": "Every run prints the panel and writes ergolab-report.json, report/report.md, and badge.json — a shields.io endpoint you host raw in your repo for a README badge. There is no registry: the report is a matrix you commit and diff across releases.",
+        "zh": "每次运行都会打印面板并写出 ergolab-report.json、report/report.md 与 badge.json —— 后者是一份 shields.io endpoint 文档，放进仓库即可得到 README 徽章。没有注册表：报告就是一张你提交进仓库、跨版本 diff 的矩阵。"
+      }
+    }
+  ],
+  "story": {
+    "intro": {
+      "title": {
+        "en": "You shipped it for agents. Can they use it?",
+        "zh": "你为智能体发布了它。它们用得了吗？"
+      },
+      "body": {
+        "en": "You shipped an MCP server, an agent-facing CLI, or docs written for agents — and the only instrument you had was trying it in your own Claude Code session: one agent, one day, no baseline, no cost column, no way to compare Claude Code against Codex against Gemini CLI on the same tasks. This is not hypothetical: in August 2026 a tool-platform author hand-rolled exactly this measurement and found agents picked the richer semantic tool over grep only 0–6% of the time. ErgoLab transplants the classic usability-lab protocol — recruit a panel, give standard tasks, report where they fail, how long they take, and what they cost — so the question becomes a reproducible number you track across releases.",
+        "zh": "你发布了 MCP 服务器、面向智能体的 CLI，或者为智能体写的文档 —— 而你能用的唯一验证手段，是在自己的 Claude Code 会话里试一下：一个智能体、一天的数据、没有基线、没有成本列，也无法让 Claude Code、Codex、Gemini CLI 在同一组任务上横向对比。这不是假设出来的问题：2026 年 8 月，一位工具平台作者亲手搭了正是这套测量，发现在定位类任务上智能体选择更丰富语义工具而非 grep 的比例只有 0–6%。ErgoLab 搬来经典可用性实验的流程 —— 招募被试、给标准任务、报告失败、耗时与成本 —— 让这个问题变成一个可以跨版本追踪的可复现数字。"
+      }
+    },
+    "sections": [
+      {
+        "title": {
+          "en": "One run, cell by cell",
+          "zh": "一次运行，逐格成形"
+        },
+        "body": {
+          "en": "Each agent-task pair gets a fresh temp sandbox. A setup script seeds it, the agent subprocess runs the prompt verbatim in that workdir with your normal CLI auth, and a verify script's exit code decides the cell: pass, fail, timeout, or error — recorded with the stage the run ended in (setup / agent / verify), wall time, and token cost where the CLI reports it. The failure table names the agent, the task, and the stage; the panel report is a matrix you can diff across releases.",
+          "zh": "每个「智能体 × 任务」组合都会得到一个全新的临时沙箱：setup 脚本先落种子数据，智能体子进程在沙箱里、带着你本机的 CLI 登录态原样执行 prompt，最后 verify 脚本的退出码决定这一格是 pass、fail、timeout 还是 error —— 并记录结束时所处的阶段（setup / agent / verify）、耗时，以及 CLI 上报的 token 成本。失败明细表写明智能体、任务与阶段；面板报告是一张可以跨版本 diff 的矩阵。"
+        },
+        "image": {
+          "light": "/assets/workflow-light.svg",
+          "dark": "/assets/workflow-dark.svg",
+          "alt": {
+            "en": "Run flow: a fresh sandbox per agent-task pair — setup script, agent subprocess, verify script whose exit code decides the cell",
+            "zh": "运行流程：每个智能体-任务组合一个全新沙箱 —— setup 脚本、智能体子进程、退出码定生死的 verify 脚本"
+          },
+          "mobile": {
+            "light": "/assets/workflow-mobile-light.svg",
+            "dark": "/assets/workflow-mobile-dark.svg"
+          }
+        }
+      },
+      {
+        "title": {
+          "en": "One binary, no services",
+          "zh": "一个二进制，没有服务"
+        },
+        "body": {
+          "en": "One process, one ergolab binary; agent CLIs are child processes — no services, no database, no sandboxing VMs. A suite file (ergolab.yaml, loaded with yaml + zod) feeds the Runner, which drives one driver per agent: claude-code, codex, gemini-cli, and mock. The driver interface is the only extension point — detect(), buildInvocation(task, sandbox), parseUsage(rawOutput) — and detect() never assumes PATH alone. The Reporter prints the terminal table and writes the artifacts.",
+          "zh": "一个进程、一个 ergolab 二进制；智能体 CLI 都是子进程 —— 没有服务、没有数据库、也没有沙箱虚拟机。套件文件（ergolab.yaml，经 yaml + zod 加载）交给 Runner，由它按智能体驱动对应的 driver：claude-code、codex、gemini-cli 与 mock。Driver 接口是唯一的扩展点 —— detect()、buildInvocation(task, sandbox)、parseUsage(rawOutput) —— 而 detect() 从不只看 PATH。Reporter 负责打印终端表格并写出工件。"
+        },
+        "image": {
+          "light": "/assets/architecture-light.svg",
+          "dark": "/assets/architecture-dark.svg",
+          "alt": {
+            "en": "Architecture: ergolab.yaml through SuiteLoader, Runner with fresh sandboxes, the four drivers, and the Reporter writing the panel and artifacts",
+            "zh": "架构：ergolab.yaml 经 SuiteLoader 与 Runner（全新沙箱），到四个 driver，再到写出面板与工件的 Reporter"
+          },
+          "mobile": {
+            "light": "/assets/architecture-mobile-light.svg",
+            "dark": "/assets/architecture-mobile-dark.svg"
+          }
+        }
+      },
+      {
+        "title": {
+          "en": "The panel and the artifacts",
+          "zh": "面板与工件"
+        },
+        "body": {
+          "en": "Real agent CLIs join the panel automatically when installed: claude-code runs claude -p --output-format json with a --mcp-config file, codex runs codex exec --json with workspace-write pinned to the sandbox, gemini-cli runs gemini -y --output-format json. A suite can register stdio MCP servers for every agent, wired per driver. Artifacts land in --out: ergolab-report.json, report/report.md, and badge.json — host the badge raw in your repo and point a shields.io badge at it; on the recorded showcase run it reads agent-usability 33/100.",
+          "zh": "装了真实智能体 CLI 的机器上，它们会自动加入面板：claude-code 以 claude -p --output-format json 配 --mcp-config 文件运行，codex 以 codex exec --json（workspace-write、工作根目录固定在沙箱）运行，gemini-cli 以 gemini -y --output-format json 运行。套件可以为每个智能体注册 stdio MCP 服务器，接线按 driver 各自完成。工件写入 --out：ergolab-report.json、report/report.md 与 badge.json —— 把 badge 放在仓库里裸访问，再让 shields.io 徽章指向它；在录制的 showcase 运行上它显示 agent-usability 33/100。"
+        },
+        "image": {
+          "light": "/assets/panel-light.svg",
+          "dark": "/assets/panel-dark.svg",
+          "alt": {
+            "en": "The panel today: claude-code, codex, gemini-cli and the mock baseline around one suite, with the report, JSON and badge artifacts it writes",
+            "zh": "今天的面板：claude-code、codex、gemini-cli 与 mock 基线围绕同一套件，以及写出的报告、JSON 与徽章工件"
+          },
+          "mobile": {
+            "light": "/assets/panel-mobile-light.svg",
+            "dark": "/assets/panel-mobile-dark.svg"
+          }
+        }
+      }
+    ],
+    "details": [
+      {
+        "title": {
+          "en": "Commands",
+          "zh": "命令"
+        },
+        "body": {
+          "en": "init scaffolds ergolab.yaml with three runnable starter tasks; run points a panel at a suite directory, a suite file, or a bundled name (demo-mcp, showcase-grep-vs-tool). --agents selects the panel (default: mock,claude-code,codex,gemini-cli), --out picks the artifact directory, and report re-renders a saved ergolab-report.json anywhere.",
+          "zh": "init 在当前目录生成带三个开箱即跑入门任务的 ergolab.yaml；run 把面板指向一个套件目录、套件文件或内置套件名（demo-mcp、showcase-grep-vs-tool）。--agents 选择面板（默认：mock,claude-code,codex,gemini-cli），--out 指定工件目录，report 可在任何地方重新渲染一份已保存的 ergolab-report.json。"
+        },
+        "code": "ergolab init\nergolab run demo-mcp\nergolab run <suite> --agents mock,claude-code,codex,gemini-cli\nergolab run <suite> --out <dir>\nergolab list-suites\nergolab showcase\nergolab report [file] --out <dir>"
+      },
+      {
+        "title": {
+          "en": "The suite format",
+          "zh": "套件格式"
+        },
+        "body": {
+          "en": "A suite names the tool under test, optionally registers stdio MCP servers (suite-relative paths are absolutized per agent), and lists tasks: a unique name, the prompt handed to the agent verbatim, an optional setup shell, a verify shell whose exit code decides pass, and a per-task timeout (default 120s) applied to each stage.",
+          "zh": "套件声明被测工具，可选地注册 stdio MCP 服务器（套件相对路径按智能体逐一绝对化），并列出任务：唯一名称、原样交给智能体的 prompt、可选的 setup shell、退出码决定通过与否的 verify shell，以及作用于每个阶段的单任务超时（默认 120 秒）。"
+        },
+        "code": "tool: leftpad\n\nmcp_servers:\n  registry:\n    command: node\n    args: [\"--experimental-strip-types\", \"server/index.ts\"]\n\ntasks:\n  - name: find-latest-version\n    prompt: >-\n      Find the latest stable version of `leftpad` with the registry MCP\n      server; write it to answer.txt.\n    setup: \"echo seed-data > data.txt\"\n    verify: \"grep -q '1.4.2' answer.txt\"\n    timeout_s: 120"
+      },
+      {
+        "title": {
+          "en": "The A/B two-suite pattern",
+          "zh": "A/B 双套件模式"
+        },
+        "body": {
+          "en": "Run the same tasks twice — once with your MCP server registered, once with a plain-file mirror of the data — and the two panels measure what tool access changes. The bundled pair is the showcase: the same six tasks over the same dataset pass 2/6 for the grep-only mock when the answers live in a plain file, and 0/6 when they sit behind the bundled stdio MCP registry server.",
+          "zh": "同一组任务跑两遍 —— 一次注册你的 MCP 服务器，一次换成数据的纯文本镜像 —— 两张面板就量出了「工具访问」到底改变了什么。内置的 showcase 就是这对样例：同样的六个任务、同一份数据集，答案在纯文本文件里时只会 grep 的 mock 通过 2/6，答案挪到内置 stdio MCP registry 服务器背后时为 0/6。"
+        }
+      }
+    ]
+  },
+  "demo": {
+    "title": {
+      "en": "Recorded demo",
+      "zh": "真实演示"
+    },
+    "note": {
+      "en": "Commands and outputs below are copied verbatim from docs/demo-results.json, recorded 2026-09-11 on darwin arm64, Node v22.23.1. The recorded panel is the deterministic mock driver — a grep-only stand-in with no model, no key, no tool access; claude-code and codex were discovered runnable on the recording machine but not invoked for this record, and gemini-cli is not installed there (its row is kept as skipped). These numbers are the A/B baseline, not measured performance of real agents. The repo also ships a terminal gif of the showcase run (assets/ergolab-demo.gif).",
+      "zh": "下面的命令与输出逐字复制自 docs/demo-results.json（2026-09-11 录制于 darwin arm64、Node v22.23.1）。录制时的面板是确定性的 mock driver —— 一个只会 grep 的替身：无模型、无密钥、无工具访问；claude-code 与 codex 在录制机器上被探测为可运行、但本次录制未调用，gemini-cli 在该机器上未安装（其行保留为 skipped）。这些数字是 A/B 基线，不是真实智能体的实测性能。仓库还附带 showcase 运行的终端动图（assets/ergolab-demo.gif）。"
+    },
+    "source": "https://github.com/SuperMarioYL/ergolab/blob/main/docs/demo-results.json",
+    "steps": [
+      {
+        "label": {
+          "en": "A/B, grep arm — showcase",
+          "zh": "A/B 的 grep 一侧 — showcase"
+        },
+        "body": {
+          "en": "The grep arm of the bundled A/B pair: the same six tasks with the dataset as a plain file in the sandbox. The grep-only mock passes the two substring lookups and fails exact extraction and aggregation — 2/6. gemini-cli is not installed on the recording machine, so its row is kept as skipped (not-found).",
+          "zh": "内置 A/B 对照的 grep 一侧：同样的六个任务，数据集是沙箱里的一个纯文本文件。只会 grep 的 mock 通过两个子串查找，精确提取与聚合全部失败 —— 2/6。录制机器上未安装 gemini-cli，它的行保留为 skipped (not-found)。"
+        },
+        "image": "/assets/demo-showcase-light.svg",
+        "imageDark": "/assets/demo-showcase-dark.svg",
+        "command": "node dist/cli.js run suites/showcase-grep-vs-tool --agents mock,gemini-cli --out <tmp>/showcase",
+        "output": "┌──────────┬─────────────────────┬──────────────┬───────────────────┬──────────────────┬─────────────────┬────────────────┐\n│ agent    │ find-latest-version │ find-license │ list-dependencies │ count-by-keyword │ find-deprecated │ find-publisher │\n├──────────┼─────────────────────┼──────────────┼───────────────────┼──────────────────┼─────────────────┼────────────────┤\n│ mock     │ pass 16ms           │ pass 14ms    │ fail 13ms         │ fail 13ms        │ fail 15ms       │ fail 14ms      │\n└──────────┴─────────────────────┴──────────────┴───────────────────┴──────────────────┴─────────────────┴────────────────┘\nScorecard: mock 2/6 · gemini-cli skipped — panel 2/6 (33%)"
+      },
+      {
+        "label": {
+          "en": "A/B, tool arm — demo-mcp",
+          "zh": "A/B 的工具一侧 — demo-mcp"
+        },
+        "body": {
+          "en": "The tool arm: every answer lives only behind the bundled stdio MCP registry server, which a grep-only agent cannot use — nothing greppable in the sandbox, no tool access, 0/6. Same six tasks, same dataset.",
+          "zh": "工具一侧：每个答案都只存在于内置 stdio MCP registry 服务器背后，只会 grep 的智能体用不了它 —— 沙箱里无可 grep 的内容、没有工具访问，0/6。同样的六个任务、同一份数据集。"
+        },
+        "image": "/assets/demo-mcp-light.svg",
+        "imageDark": "/assets/demo-mcp-dark.svg",
+        "command": "node dist/cli.js run demo-mcp --agents mock --out <tmp>/demomcp",
+        "output": "┌──────────┬─────────────────────┬──────────────┬───────────────────┬──────────────────┬─────────────────┬────────────────┐\n│ agent    │ find-latest-version │ find-license │ list-dependencies │ count-by-keyword │ find-deprecated │ find-publisher │\n├──────────┼─────────────────────┼──────────────┼───────────────────┼──────────────────┼─────────────────┼────────────────┤\n│ mock     │ fail 8ms            │ fail 6ms     │ fail 7ms          │ fail 6ms         │ fail 7ms        │ fail 5ms       │\n└──────────┴─────────────────────┴──────────────┴───────────────────┴──────────────────┴─────────────────┴────────────────┘\nScorecard: mock 0/6 — panel 0/6 (0%)"
+      },
+      {
+        "label": {
+          "en": "On your own tool — init",
+          "zh": "在你自己的工具上 — init"
+        },
+        "body": {
+          "en": "ergolab init scaffolds a suite with three runnable starter tasks. Recorded on a clean directory with nothing edited: the three tasks run keyless with the mock agent — lookup-answer passes, use-the-tool and follow-the-docs fail. The affordance gap, in miniature.",
+          "zh": "ergolab init 生成带三个开箱即跑入门任务的套件。以下录制自一个空目录、未做任何编辑：三个任务以 mock 智能体免密钥运行 —— lookup-answer 通过，use-the-tool 与 follow-the-docs 失败。可用性缺口的缩影。"
+        },
+        "image": "/assets/demo-init-light.svg",
+        "imageDark": "/assets/demo-init-dark.svg",
+        "command": "ergolab init\n# edit nothing\nergolab run . --agents mock",
+        "output": "exit 0; three starter tasks run keyless: lookup-answer pass, use-the-tool fail, follow-the-docs fail (the affordance gap, in miniature)"
+      }
+    ]
+  },
+  "quickstart": {
+    "title": {
+      "en": "From one command to your own panel",
+      "zh": "从一条命令到你自己的面板"
+    },
+    "body": {
+      "en": "No permanent install; Node.js 22.6+ required (the bundled demo server uses built-in TypeScript stripping). Even with no agent CLI installed you get a full report — the mock always runs. To use real agents, install and authenticate the corresponding CLI (claude, codex, or gemini); none are required.",
+      "zh": "无需安装；要求 Node.js 22.6+（内置演示服务器用到了 Node 原生 TypeScript 剥离）。即使一个智能体 CLI 都没装，也能拿到完整报告 —— mock 始终参与。想跑真实智能体，安装并登录对应 CLI（claude、codex 或 gemini）即可；都不是必需的。"
+    },
+    "steps": [
+      {
+        "title": {
+          "en": "Run the bundled demo",
+          "zh": "跑内置演示"
+        },
+        "code": "npx ergolab run demo-mcp"
+      },
+      {
+        "title": {
+          "en": "Point it at your tool",
+          "zh": "指向你自己的工具"
+        },
+        "code": "cd your-repo\nnpx ergolab init          # scaffolds ergolab.yaml — three runnable starter tasks\n# edit the three prompts to name your tool's operations (the one step over 60 seconds)\nnpx ergolab run .         # a panel report on your own tool"
+      },
+      {
+        "title": {
+          "en": "Commit the report, host the badge",
+          "zh": "提交报告，挂上徽章"
+        },
+        "code": "# every run writes ergolab-report.json, report/report.md, badge.json\n# host badge.json raw in your repo and point a shields.io badge at it:\nhttps://img.shields.io/endpoint?url=https://raw.githubusercontent.com/<you>/<repo>/main/badge.json"
+      }
+    ]
+  },
+  "limitations": [
+    {
+      "en": "The recorded panel is the deterministic mock driver — a grep-only stand-in with no model, key, or tool access. claude-code and codex were discovered runnable on the recording machine but not invoked for the record; any real run is one command away (ergolab run demo-mcp with no --agents).",
+      "zh": "录制的面板是确定性的 mock driver —— 一个只会 grep、无模型、无密钥、无工具访问的替身。claude-code 与 codex 在录制机器上被探测为可运行、但本次录制未调用；真实运行只差一条命令（不带 --agents 的 ergolab run demo-mcp）。"
+    },
+    {
+      "en": "The gemini-cli headless invocation is unverified end to end: no gemini binary exists on the recording machine, so the driver resolves as skipped (not-found) and its flags are coded from the CLI's documented non-interactive mode only.",
+      "zh": "gemini-cli 的无头调用尚未端到端验证：录制机器上没有 gemini 二进制，该 driver 解析为 skipped (not-found)，其参数仅按该 CLI 文档化的非交互模式编写。"
+    },
+    {
+      "en": "Exit-code oracle only: verification is a shell's exit code — deterministic and free, but it checks the artifact, not the reasoning. No LLM judge, by design.",
+      "zh": "只有退出码判据：验证就是 shell 的退出码 —— 确定且免费，但它检查的是产物而不是推理过程。不设 LLM 裁判，是有意为之。"
+    },
+    {
+      "en": "One sequential sample per agent-task pair — no repeats, no confidence intervals. The report surfaces cliffs (2 of 6, 0 of 6), not fine differences; statistical repeats and variance reporting are roadmap items, not shipped behavior.",
+      "zh": "每对「智能体 × 任务」顺序执行、只有一个样本 —— 没有重复运行，没有置信区间。报告呈现的是断崖（2/6、0/6），不是细微差异；统计重复与方差报告在路线图里，不在当前版本。"
+    },
+    {
+      "en": "Agents run in fresh temp workdirs with your normal CLI auth — the environment you ship for, not a container. Docker/VM sandboxing and Windows support are roadmap items; wall times are machine-specific (this record: darwin arm64), so treat them as orders of magnitude.",
+      "zh": "智能体在全新的临时工作目录里、带着你本机的 CLI 登录态运行 —— 是你为之构建的环境，而不是容器。Docker/VM 沙箱与 Windows 支持在路线图里；耗时与机器相关（本次录制为 darwin arm64），只应看作数量级。"
+    }
+  ],
+  "cta": {
+    "headline": {
+      "en": "Stop guessing.\nStart measuring.",
+      "zh": "别再猜测，\n开始测量。"
+    },
+    "sub": {
+      "en": "Free and open source (MIT) · the mock baseline needs no API key · no registry",
+      "zh": "免费开源（MIT）· mock 基线无需 API key · 无注册表"
+    },
+    "button": {
+      "en": "Get started on GitHub",
+      "zh": "在 GitHub 上开始"
+    }
+  },
+  "footer": {
+    "tag": {
+      "en": "Exit-code verification, no LLM judge — the report stays in your repo.",
+      "zh": "退出码验证，不用 LLM 裁判 —— 报告永远留在你的仓库里。"
+    }
+  }
+}

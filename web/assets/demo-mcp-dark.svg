@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="300" viewBox="0 0 760 300" data-palette="e656c0-e76a83-eeacf6-6bc3d1c46b53" role="img" aria-labelledby="el-d2-d-title el-d2-d-desc"><title id="el-d2-d-title">ErgoLab demo: demo-mcp, tool arm</title><desc id="el-d2-d-desc">Recorded panel for the tool arm: behind the demo MCP server the grep-only mock fails all six tasks (0/6).</desc>
+<defs>
+<linearGradient id="el-d2-d-brand" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e656c0"/><stop offset="0.55" stop-color="#e76a83"/><stop offset="1" stop-color="#eeacf6"/></linearGradient>
+<radialGradient id="el-d2-d-halo" cx="0.62" cy="0.36" r="0.85"><stop stop-color="#e656c0" stop-opacity="0.2"/><stop offset="1" stop-color="#0a0710" stop-opacity="0"/></radialGradient>
+<marker id="el-d2-d-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="m1 1 7 4-7 4" fill="none" stroke="#e656c0" stroke-width="1.5"/></marker>
+</defs>
+<style>text{font-family:Arial,'Helvetica Neue','Noto Sans',sans-serif}.el-d2-d-mono{font-family:Menlo,Consolas,'Liberation Mono',monospace}</style>
+<rect width="760" height="300" rx="14" fill="#0a0710"/>
+<rect width="760" height="300" rx="14" fill="url(#el-d2-d-halo)"/>
+<pattern id="el-d2-d-grid" width="44" height="44" patternUnits="userSpaceOnUse"><path d="M44 0H0V44" fill="none" stroke="#3a1837" stroke-opacity="0.32" stroke-width="0.6"/></pattern><rect width="760" height="300" rx="14" fill="url(#el-d2-d-grid)"/>
+
+<rect x="24" y="20" width="712" height="260" rx="12" fill="#140d1a" stroke="#3a1837"/>
+<circle cx="46" cy="40" r="5" fill="#3a1837"/><circle cx="64" cy="40" r="5" fill="#3a1837"/><circle cx="82" cy="40" r="5" fill="#3a1837"/>
+<text x="380" y="44" fill="#b29cbd" font-size="11" font-weight="600" text-anchor="middle" class="el-d2-d-mono">ergolab — demo-mcp · tool arm</text>
+<line x1="24" y1="58" x2="736" y2="58" stroke="#3a1837"/>
+<text x="44" y="84" fill="#e656c0" font-size="11" font-weight="600" class="el-d2-d-mono">$ node dist/cli.js run demo-mcp --agents mock</text>
+<rect x="44" y="108" width="60" height="22" fill="#0a0710" stroke="#3a1837"/>
+<text x="50" y="123" fill="#b29cbd" font-size="8.5" font-weight="600" class="el-d2-d-mono">agent</text>
+<rect x="107" y="108" width="99.5" height="22" fill="#0a0710" stroke="#3a1837"/>
+<text x="156.75" y="123" fill="#b29cbd" font-size="8" font-weight="600" text-anchor="middle" class="el-d2-d-mono">find-latest-version</text>
+<rect x="209.5" y="108" width="99.5" height="22" fill="#0a0710" stroke="#3a1837"/>
+<text x="259.25" y="123" fill="#b29cbd" font-size="8" font-weight="600" text-anchor="middle" class="el-d2-d-mono">find-license</text>
+<rect x="312" y="108" width="99.5" height="22" fill="#0a0710" stroke="#3a1837"/>
+<text x="361.75" y="123" fill="#b29cbd" font-size="8" font-weight="600" text-anchor="middle" class="el-d2-d-mono">list-dependencies</text>
+<rect x="414.5" y="108" width="99.5" height="22" fill="#0a0710" stroke="#3a1837"/>
+<text x="464.25" y="123" fill="#b29cbd" font-size="8" font-weight="600" text-anchor="middle" class="el-d2-d-mono">count-by-keyword</text>
+<rect x="517" y="108" width="99.5" height="22" fill="#0a0710" stroke="#3a1837"/>
+<text x="566.75" y="123" fill="#b29cbd" font-size="8" font-weight="600" text-anchor="middle" class="el-d2-d-mono">find-deprecated</text>
+<rect x="619.5" y="108" width="99.5" height="22" fill="#0a0710" stroke="#3a1837"/>
+<text x="669.25" y="123" fill="#b29cbd" font-size="8" font-weight="600" text-anchor="middle" class="el-d2-d-mono">find-publisher</text>
+<rect x="44" y="133" width="60" height="26" fill="#0a0710" stroke="#3a1837"/>
+<text x="50" y="150" fill="#fceefd" font-size="9.5" font-weight="600" class="el-d2-d-mono">mock</text>
+<rect x="107" y="133" width="99.5" height="26" fill="#0a0710" fill-opacity="1" stroke="#3a1837"/>
+<text x="156.75" y="150" fill="#b29cbd" font-size="9" font-weight="400" text-anchor="middle" class="el-d2-d-mono">fail 8ms</text>
+<rect x="209.5" y="133" width="99.5" height="26" fill="#0a0710" fill-opacity="1" stroke="#3a1837"/>
+<text x="259.25" y="150" fill="#b29cbd" font-size="9" font-weight="400" text-anchor="middle" class="el-d2-d-mono">fail 6ms</text>
+<rect x="312" y="133" width="99.5" height="26" fill="#0a0710" fill-opacity="1" stroke="#3a1837"/>
+<text x="361.75" y="150" fill="#b29cbd" font-size="9" font-weight="400" text-anchor="middle" class="el-d2-d-mono">fail 7ms</text>
+<rect x="414.5" y="133" width="99.5" height="26" fill="#0a0710" fill-opacity="1" stroke="#3a1837"/>
+<text x="464.25" y="150" fill="#b29cbd" font-size="9" font-weight="400" text-anchor="middle" class="el-d2-d-mono">fail 6ms</text>
+<rect x="517" y="133" width="99.5" height="26" fill="#0a0710" fill-opacity="1" stroke="#3a1837"/>
+<text x="566.75" y="150" fill="#b29cbd" font-size="9" font-weight="400" text-anchor="middle" class="el-d2-d-mono">fail 7ms</text>
+<rect x="619.5" y="133" width="99.5" height="26" fill="#0a0710" fill-opacity="1" stroke="#3a1837"/>
+<text x="669.25" y="150" fill="#b29cbd" font-size="9" font-weight="400" text-anchor="middle" class="el-d2-d-mono">fail 5ms</text>
+<text x="44" y="214" fill="#fceefd" font-size="11" font-weight="600" class="el-d2-d-mono">Scorecard: mock 0/6 — panel 0/6 (0%)</text>
+<rect x="524" y="202" width="112" height="22" rx="5" fill="#13101d" stroke="#3a1837"/>
+<text x="580" y="217" fill="#b29cbd" font-size="9.5" font-weight="600" text-anchor="middle" class="el-d2-d-mono">agent-usability</text>
+<rect x="636" y="202" width="52" height="22" rx="5" fill="#bf48a0"/>
+<text x="662" y="217" fill="#ffffff" font-size="9.5" font-weight="600" text-anchor="middle" class="el-d2-d-mono">0/100</text>
+<text x="44" y="246" fill="#b29cbd" font-size="9.5" font-weight="600" class="el-d2-d-mono">every answer lives behind the bundled stdio MCP registry server —</text>
+<text x="44" y="262" fill="#b29cbd" font-size="9.5" font-weight="600" class="el-d2-d-mono">nothing greppable, no tool access; the same six tasks pass 2/6 on the grep arm</text>
+</svg>

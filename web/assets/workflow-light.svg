@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="440" viewBox="0 0 1000 440" data-palette="e656c0-e76a83-eeacf6-6bc3d1c46b53" role="img" aria-labelledby="el-wf-l-title el-wf-l-desc"><title id="el-wf-l-title">ErgoLab run flow</title><desc id="el-wf-l-desc">A fresh sandbox per agent-task pair: a setup script, the agent subprocess, and a verify script whose exit code decides the cell.</desc>
+<defs>
+<linearGradient id="el-wf-l-brand" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b74499"/><stop offset="0.55" stop-color="#b25265"/><stop offset="1" stop-color="#8a648f"/></linearGradient>
+<radialGradient id="el-wf-l-halo" cx="0.62" cy="0.36" r="0.85"><stop stop-color="#b74499" stop-opacity="0.1"/><stop offset="1" stop-color="#fef9fd" stop-opacity="0"/></radialGradient>
+<marker id="el-wf-l-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="m1 1 7 4-7 4" fill="none" stroke="#b74499" stroke-width="1.5"/></marker>
+</defs>
+<style>text{font-family:Arial,'Helvetica Neue','Noto Sans',sans-serif}.el-wf-l-mono{font-family:Menlo,Consolas,'Liberation Mono',monospace}.el-wf-l-flow{animation:el-wf-l-fdash 5.5s linear infinite}@keyframes el-wf-l-fdash{to{stroke-dashoffset:-180}}.el-wf-l-pulse{animation:el-wf-l-fpulse 4.2s ease-in-out infinite}@keyframes el-wf-l-fpulse{0%,100%{opacity:.45}50%{opacity:1}}@media (prefers-reduced-motion: reduce){*{animation:none !important;transform:none !important}}</style>
+<rect width="1000" height="440" rx="14" fill="#fef9fd"/>
+<rect width="1000" height="440" rx="14" fill="url(#el-wf-l-halo)"/>
+<pattern id="el-wf-l-grid" width="44" height="44" patternUnits="userSpaceOnUse"><path d="M44 0H0V44" fill="none" stroke="#f7cbec" stroke-opacity="0.5" stroke-width="0.6"/></pattern><rect width="1000" height="440" rx="14" fill="url(#el-wf-l-grid)"/>
+
+<text x="36" y="42" fill="#725e80" font-size="12" font-weight="600" letter-spacing="2">ONE RUN, CELL BY CELL</text>
+<text x="36" y="72" fill="#27162a" font-size="19" font-weight="700">From prompt to panel cell</text>
+<rect x="36" y="96" width="200" height="100" rx="10" fill="#fef7fc" stroke="#f7cbec" stroke-width="1"/><text x="52" y="124" fill="#b74499" font-size="15" font-weight="700">1 · setup</text><text x="52" y="144" fill="#725e80" font-size="11.5" font-weight="600" class="el-wf-l-mono">shell seeds the sandbox</text><text x="52" y="162" fill="#725e80" font-size="11.5" font-weight="600" class="el-wf-l-mono">fresh temp dir</text><text x="52" y="180" fill="#725e80" font-size="11.5" font-weight="600" class="el-wf-l-mono">per agent × task</text>
+<rect x="276" y="96" width="200" height="100" rx="10" fill="#fef7fc" stroke="#f7cbec" stroke-width="1"/><text x="292" y="124" fill="#b74499" font-size="15" font-weight="700">2 · agent</text><text x="292" y="144" fill="#725e80" font-size="11.5" font-weight="600" class="el-wf-l-mono">prompt, verbatim</text><text x="292" y="162" fill="#725e80" font-size="11.5" font-weight="600" class="el-wf-l-mono">child process</text><text x="292" y="180" fill="#725e80" font-size="11.5" font-weight="600" class="el-wf-l-mono">your CLI auth</text>
+<rect x="516" y="96" width="200" height="100" rx="10" fill="#fef7fc" stroke="#f7cbec" stroke-width="1"/><text x="532" y="124" fill="#b74499" font-size="15" font-weight="700">3 · verify</text><text x="532" y="144" fill="#725e80" font-size="11.5" font-weight="600" class="el-wf-l-mono">exit code decides</text><text x="532" y="162" fill="#725e80" font-size="11.5" font-weight="600" class="el-wf-l-mono">no LLM judge</text><text x="532" y="180" fill="#725e80" font-size="11.5" font-weight="600" class="el-wf-l-mono">deterministic</text>
+<rect x="756" y="96" width="208" height="82" rx="10" fill="#fef7fc" stroke="#b74499" stroke-width="1.6"/>
+<text x="772" y="124" fill="#b74499" font-size="15" font-weight="700">panel cell</text>
+<text x="772" y="144" fill="#725e80" font-size="11" font-weight="600" class="el-wf-l-mono">pass / fail / timeout / error</text>
+<text x="772" y="162" fill="#725e80" font-size="11" font-weight="600" class="el-wf-l-mono">+ stage · wall time · tokens</text>
+<path d="M240 146 H268" fill="none" stroke="#b74499" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="4 6" marker-end="url(#el-wf-l-arrow)" class="el-wf-l-flow"/>
+<path d="M480 146 H508" fill="none" stroke="#b74499" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="4 6" marker-end="url(#el-wf-l-arrow)" class="el-wf-l-flow"/>
+<path d="M720 146 H748" fill="none" stroke="#b74499" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="4 6" marker-end="url(#el-wf-l-arrow)" class="el-wf-l-flow"/>
+<rect x="36" y="252" width="928" height="112" rx="10" fill="#fdf3fb" stroke="#f7cbec"/>
+<rect x="36" y="252" width="4" height="112" rx="2" fill="#b74499" fill-opacity="0.6"/>
+<text x="56" y="278" fill="#725e80" font-size="11.5" font-weight="600" class="el-wf-l-mono">failure table — agent · task · stage</text>
+<text x="56" y="304" fill="#27162a" font-size="12" font-weight="600" class="el-wf-l-mono">mock · find-publisher · verify · fail 14ms</text>
+<text x="56" y="326" fill="#27162a" font-size="12" font-weight="600" class="el-wf-l-mono">mock · list-dependencies · verify · fail 13ms</text>
+<text x="56" y="348" fill="#725e80" font-size="12" font-weight="600" class="el-wf-l-mono">gemini-cli · discovery · skipped (reason: not-found)</text>
+<line x1="36" y1="390" x2="964" y2="390" stroke="#f7cbec"/>
+<text x="36" y="416" fill="#725e80" font-size="12" font-weight="600" class="el-wf-l-mono">the stage the run ended in: setup / agent / verify — wall time and token cost where the CLI reports it</text>
+</svg>

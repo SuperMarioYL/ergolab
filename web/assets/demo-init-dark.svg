@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="300" viewBox="0 0 760 300" data-palette="e656c0-e76a83-eeacf6-6bc3d1c46b53" role="img" aria-labelledby="el-d3-d-title el-d3-d-desc"><title id="el-d3-d-title">ErgoLab demo: init scaffold</title><desc id="el-d3-d-desc">Recorded on a clean directory with nothing edited: the three starter tasks run keyless with the mock agent — lookup-answer passes, use-the-tool and follow-the-docs fail.</desc>
+<defs>
+<linearGradient id="el-d3-d-brand" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e656c0"/><stop offset="0.55" stop-color="#e76a83"/><stop offset="1" stop-color="#eeacf6"/></linearGradient>
+<radialGradient id="el-d3-d-halo" cx="0.62" cy="0.36" r="0.85"><stop stop-color="#e656c0" stop-opacity="0.2"/><stop offset="1" stop-color="#0a0710" stop-opacity="0"/></radialGradient>
+<marker id="el-d3-d-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="m1 1 7 4-7 4" fill="none" stroke="#e656c0" stroke-width="1.5"/></marker>
+</defs>
+<style>text{font-family:Arial,'Helvetica Neue','Noto Sans',sans-serif}.el-d3-d-mono{font-family:Menlo,Consolas,'Liberation Mono',monospace}</style>
+<rect width="760" height="300" rx="14" fill="#0a0710"/>
+<rect width="760" height="300" rx="14" fill="url(#el-d3-d-halo)"/>
+<pattern id="el-d3-d-grid" width="44" height="44" patternUnits="userSpaceOnUse"><path d="M44 0H0V44" fill="none" stroke="#3a1837" stroke-opacity="0.32" stroke-width="0.6"/></pattern><rect width="760" height="300" rx="14" fill="url(#el-d3-d-grid)"/>
+
+<rect x="24" y="20" width="712" height="260" rx="12" fill="#140d1a" stroke="#3a1837"/>
+<circle cx="46" cy="40" r="5" fill="#3a1837"/><circle cx="64" cy="40" r="5" fill="#3a1837"/><circle cx="82" cy="40" r="5" fill="#3a1837"/>
+<text x="380" y="44" fill="#b29cbd" font-size="11" font-weight="600" text-anchor="middle" class="el-d3-d-mono">ergolab — init scaffold · your own tool</text>
+<line x1="24" y1="58" x2="736" y2="58" stroke="#3a1837"/>
+<text x="44" y="84" fill="#e656c0" font-size="11" font-weight="600" class="el-d3-d-mono">$ ergolab init</text>
+<text x="44" y="102" fill="#b29cbd" font-size="11" font-weight="600" class="el-d3-d-mono"># edit nothing</text>
+<text x="44" y="120" fill="#e656c0" font-size="11" font-weight="600" class="el-d3-d-mono">$ ergolab run . --agents mock</text>
+<rect x="44" y="144" width="500" height="28" rx="6" fill="#0a0710" stroke="#3a1837"/>
+<text x="58" y="163" fill="#fceefd" font-size="11" font-weight="600" class="el-d3-d-mono">lookup-answer</text>
+<rect x="620" y="144" width="76" height="28" rx="6" fill="#bf48a0" stroke="#bf48a0"/>
+<text x="658" y="163" fill="#ffffff" font-size="10.5" font-weight="700" text-anchor="middle" class="el-d3-d-mono">pass</text>
+<rect x="44" y="180" width="500" height="28" rx="6" fill="#0a0710" stroke="#3a1837"/>
+<text x="58" y="199" fill="#fceefd" font-size="11" font-weight="600" class="el-d3-d-mono">use-the-tool</text>
+<rect x="620" y="180" width="76" height="28" rx="6" fill="#0a0710" stroke="#3a1837"/>
+<text x="658" y="199" fill="#b29cbd" font-size="10.5" font-weight="700" text-anchor="middle" class="el-d3-d-mono">fail</text>
+<rect x="44" y="216" width="500" height="28" rx="6" fill="#0a0710" stroke="#3a1837"/>
+<text x="58" y="235" fill="#fceefd" font-size="11" font-weight="600" class="el-d3-d-mono">follow-the-docs</text>
+<rect x="620" y="216" width="76" height="28" rx="6" fill="#0a0710" stroke="#3a1837"/>
+<text x="658" y="235" fill="#b29cbd" font-size="10.5" font-weight="700" text-anchor="middle" class="el-d3-d-mono">fail</text>
+<text x="44" y="262" fill="#b29cbd" font-size="9.5" font-weight="600" class="el-d3-d-mono">exit 0 · three starter tasks run keyless — the affordance gap, in miniature</text>
+</svg>

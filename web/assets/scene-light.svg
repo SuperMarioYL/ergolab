@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="700" viewBox="0 0 1000 700" data-palette="e656c0-e76a83-eeacf6-6bc3d1c46b53" role="img" aria-labelledby="el-sc-l-title el-sc-l-desc"><title id="el-sc-l-title">ErgoLab hero scene</title><desc id="el-sc-l-desc">Static still: agent particles converge into the flask and the panel report — one suite, a panel of agents, a cell-by-cell report.</desc>
+<defs>
+<linearGradient id="el-sc-l-brand" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b74499"/><stop offset="0.55" stop-color="#b25265"/><stop offset="1" stop-color="#8a648f"/></linearGradient>
+<radialGradient id="el-sc-l-halo" cx="0.62" cy="0.36" r="0.85"><stop stop-color="#b74499" stop-opacity="0.1"/><stop offset="1" stop-color="#fef9fd" stop-opacity="0"/></radialGradient>
+<marker id="el-sc-l-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="m1 1 7 4-7 4" fill="none" stroke="#b74499" stroke-width="1.5"/></marker>
+</defs>
+<style>text{font-family:Arial,'Helvetica Neue','Noto Sans',sans-serif}.el-sc-l-mono{font-family:Menlo,Consolas,'Liberation Mono',monospace}</style>
+<rect width="1000" height="700" rx="14" fill="#fef9fd"/>
+<rect width="1000" height="700" rx="14" fill="url(#el-sc-l-halo)"/>
+<pattern id="el-sc-l-grid" width="44" height="44" patternUnits="userSpaceOnUse"><path d="M44 0H0V44" fill="none" stroke="#f7cbec" stroke-opacity="0.5" stroke-width="0.6"/></pattern><rect width="1000" height="700" rx="14" fill="url(#el-sc-l-grid)"/>
+
+<text x="48" y="58" fill="#725e80" font-size="12" font-weight="600" letter-spacing="2.5">USABILITY LAB FOR CODING AGENTS</text>
+<text x="48" y="128" fill="url(#el-sc-l-brand)" font-size="60" font-weight="700" letter-spacing="-1">ErgoLab</text>
+<text x="48" y="162" fill="#27162a" font-size="17" font-weight="400">Point a panel of coding agents at your tool.</text>
+<text x="48" y="190" fill="#b74499" font-size="12.5" font-weight="600" class="el-sc-l-mono">exit-code verify · no LLM judge · reports stay in your repo</text>
+<path d="M448 470 C520 450, 580 420, 612 382" fill="none" stroke="#b74499" stroke-opacity="0.45" stroke-width="1.4" stroke-dasharray="2 8"/><rect x="400" y="466" width="96" height="30" rx="15" fill="#fdf3fb" stroke="#f7cbec"/><text x="448" y="485" fill="#725e80" font-size="11.5" text-anchor="middle" class="el-sc-l-mono">mock</text>
+<path d="M816 190 C780 220, 740 244, 706 262" fill="none" stroke="#b74499" stroke-opacity="0.45" stroke-width="1.4" stroke-dasharray="2 8"/><rect x="812" y="156" width="118" height="30" rx="15" fill="#fdf3fb" stroke="#f7cbec"/><text x="871" y="175" fill="#725e80" font-size="11.5" text-anchor="middle" class="el-sc-l-mono">claude-code</text>
+<path d="M852 428 C800 412, 760 396, 724 372" fill="none" stroke="#b74499" stroke-opacity="0.45" stroke-width="1.4" stroke-dasharray="2 8"/><rect x="852" y="420" width="84" height="30" rx="15" fill="#fdf3fb" stroke="#f7cbec"/><text x="894" y="439" fill="#725e80" font-size="11.5" text-anchor="middle" class="el-sc-l-mono">codex</text>
+<path d="M566 138 C600 168, 626 200, 642 232" fill="none" stroke="#b74499" stroke-opacity="0.45" stroke-width="1.4" stroke-dasharray="2 8"/><rect x="512" y="106" width="104" height="30" rx="15" fill="#fdf3fb" stroke="#f7cbec"/><text x="564" y="125" fill="#725e80" font-size="11.5" text-anchor="middle" class="el-sc-l-mono">gemini-cli</text>
+<circle cx="560" cy="440" r="2.4" fill="#725e80" fill-opacity="0.4"/><circle cx="596" cy="414" r="3.2" fill="#725e80" fill-opacity="0.55"/><circle cx="636" cy="398" r="2.4" fill="#725e80" fill-opacity="0.7"/><circle cx="668" cy="442" r="2.8" fill="#725e80" fill-opacity="0.4"/><circle cx="700" cy="402" r="3.4" fill="#725e80" fill-opacity="0.55"/><circle cx="742" cy="372" r="2.4" fill="#725e80" fill-opacity="0.4"/><circle cx="778" cy="344" r="3" fill="#725e80" fill-opacity="0.55"/><circle cx="806" cy="300" r="2.4" fill="#725e80" fill-opacity="0.4"/><circle cx="610" cy="200" r="2.6" fill="#725e80" fill-opacity="0.5"/><circle cx="660" cy="178" r="3.2" fill="#725e80" fill-opacity="0.4"/><circle cx="716" cy="214" r="2.4" fill="#725e80" fill-opacity="0.55"/><circle cx="752" cy="246" r="3" fill="#725e80" fill-opacity="0.4"/><circle cx="872" cy="250" r="2.6" fill="#725e80" fill-opacity="0.5"/><circle cx="890" cy="340" r="3.2" fill="#725e80" fill-opacity="0.45"/><circle cx="470" cy="520" r="2.8" fill="#725e80" fill-opacity="0.5"/>
+<circle cx="660" cy="316" r="118" fill="none" stroke="#b74499" stroke-opacity="0.25" stroke-dasharray="3 7"/>
+<path d="M645 214 V252 L601 376 Q596 390 611 390 H709 Q724 390 719 376 L675 252 V214" fill="#fef7fc" stroke="url(#el-sc-l-brand)" stroke-width="2.4" stroke-linejoin="round"/>
+<path d="M613 350 L601 376 Q596 390 611 390 H709 Q724 390 719 376 L707 350 Z" fill="#b25265" fill-opacity="0.32"/>
+<line x1="636" y1="214" x2="684" y2="214" stroke="url(#el-sc-l-brand)" stroke-width="2.4" stroke-linecap="round"/>
+<circle cx="648" cy="366" r="4" fill="#8a648f" fill-opacity="0.75"/>
+<circle cx="670" cy="374" r="3" fill="#8a648f" fill-opacity="0.6"/>
+<circle cx="661" cy="354" r="2.4" fill="#8a648f" fill-opacity="0.7"/>
+<rect x="500" y="470" width="320" height="120" rx="10" fill="#fdf3fb" stroke="#f7cbec"/>
+<text x="516" y="494" fill="#725e80" font-size="11.5" font-weight="600" class="el-sc-l-mono">panel report</text>
+<rect x="518" y="508" width="42" height="20" rx="4" fill="#b74499" fill-opacity="0.85" stroke="#b74499"/><rect x="566" y="508" width="42" height="20" rx="4" fill="#b74499" fill-opacity="0.85" stroke="#b74499"/><rect x="614" y="508" width="42" height="20" rx="4" fill="#fef9fd" fill-opacity="1" stroke="#f7cbec"/><rect x="662" y="508" width="42" height="20" rx="4" fill="#fef9fd" fill-opacity="1" stroke="#f7cbec"/><rect x="710" y="508" width="42" height="20" rx="4" fill="#fef9fd" fill-opacity="1" stroke="#f7cbec"/><rect x="758" y="508" width="42" height="20" rx="4" fill="#fef9fd" fill-opacity="1" stroke="#f7cbec"/>
+<text x="516" y="556" fill="#725e80" font-size="11" font-weight="600" class="el-sc-l-mono">mock 2/6 · gemini-cli skipped</text>
+<text x="516" y="574" fill="#725e80" font-size="10.5" font-weight="600" class="el-sc-l-mono">recorded showcase run</text>
+<text x="660" y="668" fill="#725e80" font-size="11.5" font-weight="600" text-anchor="middle" class="el-sc-l-mono">one suite · a panel of agents · a cell-by-cell report</text>
+</svg>
