@@ -20,82 +20,24 @@
  * report instead of being silently dropped.
  */
 import { spawn } from "node:child_process";
-import { existsSync, statSync } from "node:fs";
+import { existsSync } from "node:fs";
 import { writeFile } from "node:fs/promises";
-import { homedir } from "node:os";
 import path from "node:path";
-import type { AgentDriver, AgentRunInput, AgentRunOutcome } from "../runner";
+import type { AgentDriver, AgentRunInput, AgentRunOutcome, CliDriverOptions, CliResolution } from "./types";
+import { resolveDriverCli } from "./detect";
 
 /** Driver id used in panel reports. */
 export const GEMINI_CLI_DRIVER_NAME = "gemini-cli";
-
-/** The binary name the PATH probe looks for. */
-const CLI_COMMAND = "gemini";
-
-/**
- * Install locations probed when PATH has no `gemini`: the npm -g bin
- * dirs the @google/gemini-cli package installs into.
- */
-const CLI_FALLBACK_PATHS: readonly string[] = [
-  path.join(homedir(), ".local", "bin", CLI_COMMAND),
-  "/usr/local/bin/gemini",
-  "/opt/homebrew/bin/gemini",
-];
 
 /** Per-run MCP config, written into the sandbox, passed via --mcp-config. */
 const MCP_CONFIG_BASENAME = ".ergolab-mcp.json";
 
 // -- CLI resolution ---------------------------------------------------------
 //
-// The seam src/drivers/detect.ts absorbs. Probe order and skip-reason
-// format are identical across the CLI drivers: PATH first (the same
-// probe `which <cli>` performs, without a subprocess), then the driver's
-// known fallback locations. A fallback binary that runs is used from
-// where it was found; one that exists but cannot run reports
-// `off-path-at <path>`; nothing anywhere reports `not-found`. Either way
-// the agent keeps its row in the panel report — coverage stays visible.
-
-/** How a CLI driver's binary resolved for a run. */
-export type CliResolution =
-  | { status: "runnable"; path: string }
-  | { status: "skipped"; reason: string };
-
-/** Options every CLI driver accepts. */
-export interface CliDriverOptions {
-  /**
-   * Pre-resolved CLI path (from src/drivers/detect.ts, or a test). When
-   * set, PATH/fallback discovery is skipped entirely.
-   */
-  binaryPath?: string;
-}
-
-/**
- * Resolve a CLI binary: PATH first, then `fallbacks`. The reason strings
- * are report values — `not-found`, `off-path-at <path>` — kept verbatim
- * in the agent's skipped row.
- */
-export function resolveCli(command: string, fallbacks: readonly string[], pathEnv: string): CliResolution {
-  for (const dir of pathEnv.split(path.delimiter)) {
-    if (dir === "") continue;
-    const candidate = path.join(dir, command);
-    if (isExecutableFile(candidate)) return { status: "runnable", path: candidate };
-  }
-  for (const candidate of fallbacks) {
-    if (isExecutableFile(candidate)) return { status: "runnable", path: candidate };
-    if (existsSync(candidate)) return { status: "skipped", reason: `off-path-at ${candidate}` };
-  }
-  return { status: "skipped", reason: "not-found" };
-}
-
-/** A regular file with an execute bit — what `which` would accept. */
-function isExecutableFile(file: string): boolean {
-  try {
-    const stat = statSync(file);
-    return stat.isFile() && (stat.mode & 0o111) !== 0;
-  } catch {
-    return false;
-  }
-}
+// Probe order and skip-reason format are owned by src/drivers/detect.ts:
+// PATH first, then this driver's known install locations. A binary found
+// at a fallback location runs from there; an agent with no runnable
+// binary anywhere keeps its row in the panel report as skipped.
 
 // -- CLI subprocess ---------------------------------------------------------
 
@@ -258,9 +200,8 @@ export function createGeminiCliDriver(options: CliDriverOptions = {}): GeminiCli
   let resolution: CliResolution | undefined =
     preResolved !== undefined ? { status: "runnable", path: preResolved } : undefined;
 
-  /** The PATH/fallback probe runs at most once per driver instance. */
-  const resolve = (): CliResolution =>
-    (resolution ??= resolveCli(CLI_COMMAND, CLI_FALLBACK_PATHS, process.env.PATH ?? ""));
+  /** The PATH/fallback probe (src/drivers/detect.ts) runs at most once per driver instance. */
+  const resolve = (): CliResolution => (resolution ??= resolveDriverCli(GEMINI_CLI_DRIVER_NAME));
 
   return {
     name: GEMINI_CLI_DRIVER_NAME,

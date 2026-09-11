@@ -12,21 +12,16 @@
  */
 import { spawn } from "node:child_process";
 import { EventEmitter } from "node:events";
-import { chmod, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   CLAUDE_CODE_DRIVER_NAME,
   createClaudeCodeDriver,
-  resolveCli as resolveClaudeCli,
 } from "../src/drivers/claude-code";
-import { CODEX_DRIVER_NAME, createCodexDriver, resolveCli as resolveCodexCli } from "../src/drivers/codex";
-import {
-  createGeminiCliDriver,
-  GEMINI_CLI_DRIVER_NAME,
-  resolveCli as resolveGeminiCli,
-} from "../src/drivers/gemini-cli";
+import { CODEX_DRIVER_NAME, createCodexDriver } from "../src/drivers/codex";
+import { createGeminiCliDriver, GEMINI_CLI_DRIVER_NAME } from "../src/drivers/gemini-cli";
 import type { AgentDriver, AgentRunInput, AgentRunOutcome } from "../src/runner";
 import { KNOWN_DRIVERS } from "../src/schema";
 import type { McpServer, Task } from "../src/schema";
@@ -128,15 +123,6 @@ async function runInput(mcpServers: Record<string, McpServer> = { registry: REGI
   };
 }
 
-/** An executable file named `name` inside a fresh temp dir. */
-async function executableOnPath(name: string): Promise<{ dir: string; file: string }> {
-  const dir = await scratchDir("ergolab-drivers-bin-");
-  const file = path.join(dir, name);
-  await writeFile(file, "#!/bin/sh\nexit 0\n");
-  await chmod(file, 0o755);
-  return { dir, file };
-}
-
 /** The argv of a runnable driver; fails the test if the driver cannot build one. */
 async function invocationOf(
   driver: { buildInvocation(input: AgentRunInput): Promise<string[] | undefined> },
@@ -206,48 +192,6 @@ const GEMINI_RESULT = JSON.stringify({
   response: "1.4.2",
   "response._type": "FileSync",
   stats: { models: { "gemini-2.5-pro": { models: {}, tokenUsage: { totalTokenCount: 42 } } } },
-});
-
-describe("resolveCli — the discovery seam every driver shares", () => {
-  const RESOLVERS: ReadonlyArray<readonly [string, typeof resolveClaudeCli]> = [
-    ["claude-code", resolveClaudeCli],
-    ["codex", resolveCodexCli],
-    ["gemini-cli", resolveGeminiCli],
-  ];
-
-  it.each(RESOLVERS)("%s: finds the binary on PATH first", async (_name, resolve) => {
-    const fallback = await executableOnPath("claude");
-    const onPath = await executableOnPath("claude");
-
-    const resolution = resolve("claude", [fallback.file], onPath.dir);
-
-    expect(resolution).toEqual({ status: "runnable", path: onPath.file });
-  });
-
-  it.each(RESOLVERS)("%s: runs a binary found at a fallback location off PATH", async (_name, resolve) => {
-    const { file } = await executableOnPath("codex");
-
-    const resolution = resolve("codex", [file], "/nowhere-on-path");
-
-    expect(resolution).toEqual({ status: "runnable", path: file });
-  });
-
-  it.each(RESOLVERS)("%s: reports off-path-at for a found-but-unrunnable binary", async (_name, resolve) => {
-    const dir = await scratchDir("ergolab-drivers-fallback-");
-    const file = path.join(dir, "codex");
-    await writeFile(file, "present but not executable\n");
-    await chmod(file, 0o644);
-
-    const resolution = resolve("codex", [file], "/nowhere-on-path");
-
-    expect(resolution).toEqual({ status: "skipped", reason: `off-path-at ${file}` });
-  });
-
-  it.each(RESOLVERS)("%s: reports not-found when no probe location has the binary", (_name, resolve) => {
-    const resolution = resolve("gemini", [], "/nowhere-on-path");
-
-    expect(resolution).toEqual({ status: "skipped", reason: "not-found" });
-  });
 });
 
 describe("driver ids and the binaryPath seam", () => {

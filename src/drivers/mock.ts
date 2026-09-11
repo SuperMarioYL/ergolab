@@ -25,7 +25,7 @@
 import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import type { Dirent } from "node:fs";
 import path from "node:path";
-import type { AgentDriver, AgentRunInput, AgentRunOutcome } from "../runner";
+import type { AgentDriver, AgentRunInput, AgentRunOutcome } from "./types";
 
 /** Where the mock agent writes when the prompt names no output file. */
 const DEFAULT_OUTPUT_FILE = "answer.txt";
