@@ -1,0 +1,96 @@
+# ErgoLab showcase suite — the grep arm of the bundled A/B pair.
+#
+# The same six tasks as suites/demo-mcp, but no MCP server is
+# registered: the registry dataset ships as a plain text file
+# (mirror/registry.txt, seeded by each task's setup) and grep is the
+# only path to an answer. Run both suites and compare the reports to
+# see what tool access changes — the grep-vs-tool question as a
+# reproducible A/B instead of a single-agent anecdote.
+#
+# The mock driver models a grep-first agent: it greps the sandbox for
+# the entity the prompt mentions and copies the first matching line
+# into the requested output file. On this suite it passes the substring
+# lookups (find-latest-version, find-license) and fails the exact-
+# extraction and aggregation tasks — a deterministic baseline for the
+# real panel.
+
+tool: demo-registry
+
+tasks:
+  - name: find-latest-version
+    setup: |
+      mkdir -p mirror
+      cat > mirror/registry.txt <<'EOF'
+      package leftpad latest-stable 1.4.2 license MIT publisher ada keywords text-formatting,strings
+      package rightpad latest-stable 0.9.3 license MIT publisher ada keywords text-formatting,strings depends leftpad@^1.4.0
+      package kebab-case latest-stable 3.2.0 license Apache-2.0 publisher bo keywords text-formatting,naming
+      package http-fetch latest-stable 2.1.0 license MIT publisher cy keywords networking,http
+      package old-camelCase latest-stable 0.3.1 license MIT publisher ada keywords legacy deprecated true
+      EOF
+    prompt: "Find the latest stable version of `leftpad` in the sandbox registry data; write it to answer.txt."
+    verify: "grep -q '1.4.2' answer.txt"
+
+  - name: find-license
+    setup: |
+      mkdir -p mirror
+      cat > mirror/registry.txt <<'EOF'
+      package leftpad latest-stable 1.4.2 license MIT publisher ada keywords text-formatting,strings
+      package rightpad latest-stable 0.9.3 license MIT publisher ada keywords text-formatting,strings depends leftpad@^1.4.0
+      package kebab-case latest-stable 3.2.0 license Apache-2.0 publisher bo keywords text-formatting,naming
+      package http-fetch latest-stable 2.1.0 license MIT publisher cy keywords networking,http
+      package old-camelCase latest-stable 0.3.1 license MIT publisher ada keywords legacy deprecated true
+      EOF
+    prompt: "What SPDX license id does `kebab-case` 3.2.0 use according to the sandbox registry data? Write the id to answer.txt."
+    verify: "grep -q 'Apache-2.0' answer.txt"
+
+  - name: list-dependencies
+    setup: |
+      mkdir -p mirror
+      cat > mirror/registry.txt <<'EOF'
+      package leftpad latest-stable 1.4.2 license MIT publisher ada keywords text-formatting,strings
+      package rightpad latest-stable 0.9.3 license MIT publisher ada keywords text-formatting,strings depends leftpad@^1.4.0
+      package kebab-case latest-stable 3.2.0 license Apache-2.0 publisher bo keywords text-formatting,naming
+      package http-fetch latest-stable 2.1.0 license MIT publisher cy keywords networking,http
+      package old-camelCase latest-stable 0.3.1 license MIT publisher ada keywords legacy deprecated true
+      EOF
+    prompt: "List the runtime dependencies of `rightpad` 0.9.3 from the sandbox registry data; write them, one per line, to deps.txt."
+    verify: "grep -qx 'leftpad' deps.txt"
+
+  - name: count-by-keyword
+    setup: |
+      mkdir -p mirror
+      cat > mirror/registry.txt <<'EOF'
+      package leftpad latest-stable 1.4.2 license MIT publisher ada keywords text-formatting,strings
+      package rightpad latest-stable 0.9.3 license MIT publisher ada keywords text-formatting,strings depends leftpad@^1.4.0
+      package kebab-case latest-stable 3.2.0 license Apache-2.0 publisher bo keywords text-formatting,naming
+      package http-fetch latest-stable 2.1.0 license MIT publisher cy keywords networking,http
+      package old-camelCase latest-stable 0.3.1 license MIT publisher ada keywords legacy deprecated true
+      EOF
+    prompt: "How many packages in the sandbox registry data carry the keyword `text-formatting`? Write the count to answer.txt."
+    verify: "grep -qx '3' answer.txt"
+
+  - name: find-deprecated
+    setup: |
+      mkdir -p mirror
+      cat > mirror/registry.txt <<'EOF'
+      package leftpad latest-stable 1.4.2 license MIT publisher ada keywords text-formatting,strings
+      package rightpad latest-stable 0.9.3 license MIT publisher ada keywords text-formatting,strings depends leftpad@^1.4.0
+      package kebab-case latest-stable 3.2.0 license Apache-2.0 publisher bo keywords text-formatting,naming
+      package http-fetch latest-stable 2.1.0 license MIT publisher cy keywords networking,http
+      package old-camelCase latest-stable 0.3.1 license MIT publisher ada keywords legacy deprecated true
+      EOF
+    prompt: "Which package in the sandbox registry data carries the `deprecated` flag? Write its name to answer.txt."
+    verify: "grep -qx 'old-camelCase' answer.txt"
+
+  - name: find-publisher
+    setup: |
+      mkdir -p mirror
+      cat > mirror/registry.txt <<'EOF'
+      package leftpad latest-stable 1.4.2 license MIT publisher ada keywords text-formatting,strings
+      package rightpad latest-stable 0.9.3 license MIT publisher ada keywords text-formatting,strings depends leftpad@^1.4.0
+      package kebab-case latest-stable 3.2.0 license Apache-2.0 publisher bo keywords text-formatting,naming
+      package http-fetch latest-stable 2.1.0 license MIT publisher cy keywords networking,http
+      package old-camelCase latest-stable 0.3.1 license MIT publisher ada keywords legacy deprecated true
+      EOF
+    prompt: "Who publishes `http-fetch` 2.1.0 according to the sandbox registry data? Write the publisher name to answer.txt."
+    verify: "grep -qx 'cy' answer.txt"

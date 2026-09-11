@@ -1,0 +1,50 @@
+# ErgoLab demo suite — the tool arm of the bundled A/B pair.
+#
+# Six standard tasks against the bundled demo registry MCP server
+# (server/index.ts in this directory: a zero-dep stdio MCP server, run
+# through Node's built-in TypeScript stripping). Every answer lives
+# only in the server's dataset — an agent passes by using the tool
+# surface, not by grepping the sandbox.
+#
+# The mock driver (a keyless, deterministic grep-only agent) has no tool
+# access by design, so it fails every task here: the affordance gap,
+# demonstrated with no API key and no installed agent CLI. Pair this
+# suite with suites/showcase-grep-vs-tool — the same six tasks against
+# a plain-file mirror of the dataset, with no MCP server — to compare
+# tool and grep outcomes side by side.
+#
+# Paths inside mcp_servers resolve against this suite directory.
+
+tool: demo-registry
+
+mcp_servers:
+  registry:
+    command: node
+    args:
+      - --experimental-strip-types
+      - server/index.ts
+
+tasks:
+  - name: find-latest-version
+    prompt: "Find the latest stable version of `leftpad` with the demo registry MCP server; write it to answer.txt."
+    verify: "grep -q '1.4.2' answer.txt"
+
+  - name: find-license
+    prompt: "What SPDX license id does `kebab-case` 3.2.0 use? Ask the demo registry MCP server and write the id to answer.txt."
+    verify: "grep -q 'Apache-2.0' answer.txt"
+
+  - name: list-dependencies
+    prompt: "List the runtime dependencies of `rightpad` 0.9.3 with the demo registry MCP server; write them, one per line, to deps.txt."
+    verify: "grep -qx 'leftpad' deps.txt"
+
+  - name: count-by-keyword
+    prompt: "How many packages in the demo registry MCP server carry the keyword `text-formatting`? Write the count to answer.txt."
+    verify: "grep -qx '3' answer.txt"
+
+  - name: find-deprecated
+    prompt: "Which package does the demo registry MCP server mark with the `deprecated` flag? Write its name to answer.txt."
+    verify: "grep -qx 'old-camelCase' answer.txt"
+
+  - name: find-publisher
+    prompt: "Who publishes `http-fetch` 2.1.0 according to the demo registry MCP server? Write the publisher name to answer.txt."
+    verify: "grep -qx 'cy' answer.txt"
