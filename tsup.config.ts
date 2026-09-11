@@ -9,7 +9,7 @@ import { defineConfig } from "tsup";
  * that node strips on import.
  */
 export default defineConfig({
-  entry: ["src/schema.ts"],
+  entry: ["src/schema.ts", "src/suite.ts", "src/runner.ts", "src/report.ts", "src/drivers/mock.ts"],
   format: ["esm"],
   target: "node22",
   outDir: "dist",
