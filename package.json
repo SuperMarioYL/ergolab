@@ -1,0 +1,52 @@
+{
+  "name": "ergolab",
+  "version": "0.1.0",
+  "description": "A usability lab for tools built for coding agents",
+  "keywords": [
+    "coding-agents",
+    "mcp",
+    "agent-testing",
+    "usability",
+    "claude-code",
+    "codex",
+    "gemini-cli"
+  ],
+  "license": "MIT",
+  "author": "SuperMarioYL",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SuperMarioYL/ergolab.git"
+  },
+  "bugs": "https://github.com/SuperMarioYL/ergolab/issues",
+  "homepage": "https://github.com/SuperMarioYL/ergolab#readme",
+  "type": "module",
+  "bin": {
+    "ergolab": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "suites"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsup src/cli.ts --format esm --clean --banner.js \"#!/usr/bin/env node\"",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "cli-table3": "^0.6",
+    "commander": "^12",
+    "picocolors": "^1",
+    "yaml": "^2",
+    "zod": "^3.23"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "tsup": "^8",
+    "typescript": "^5.6",
+    "vitest": "^2"
+  }
+}

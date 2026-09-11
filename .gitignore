@@ -1,0 +1,28 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+
+# logs
+*.log
+
+# os junk
+.DS_Store
+
+# sandbox scratch (runner workdirs)
+sandbox/
+
+# local assistant config
+.claude/
+CLAUDE.md
+
+# build scratch and control files
+.builder_*
+.build_metadata*
+.spawn.*
+.stage_*
+_build_ctx.json
+BUILD_SETUP_NEXT_STEPS.md
+PUBLISH_BLOCKED.md
+DRIFT_REPORT.md
